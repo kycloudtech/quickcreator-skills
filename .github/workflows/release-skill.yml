@@ -1,0 +1,62 @@
+# 定点 Release：为指定的 skill 目录创建 GitHub Release 并打包 zip
+# 使用：Actions → Release skill → Run workflow，填写 skill 目录名和版本号
+name: Release skill
+
+on:
+  workflow_dispatch:
+    inputs:
+      skill_dir:
+        description: 'Skill 目录名（例如 quickcreator-developer-skill）'
+        required: true
+        type: string
+      version:
+        description: '版本号（例如 1.0.0）'
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 校验 skill 目录
+        id: validate
+        run: |
+          SKILL_DIR="${{ inputs.skill_dir }}"
+          if [ ! -d "$SKILL_DIR" ]; then
+            echo "error=目录不存在: $SKILL_DIR" >> "$GITHUB_OUTPUT"
+            echo "::error::Skill 目录不存在: $SKILL_DIR"
+            exit 1
+          fi
+          if [ ! -f "$SKILL_DIR/SKILL.md" ]; then
+            echo "error=目录内缺少 SKILL.md: $SKILL_DIR" >> "$GITHUB_OUTPUT"
+            echo "::error::该目录不是有效 skill（缺少 SKILL.md）: $SKILL_DIR"
+            exit 1
+          fi
+          echo "skill_dir=$SKILL_DIR" >> "$GITHUB_OUTPUT"
+          echo "zip_name=${SKILL_DIR}-v${{ inputs.version }}.zip" >> "$GITHUB_OUTPUT"
+          echo "tag=${SKILL_DIR}-v${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          echo "校验通过: $SKILL_DIR"
+
+      - name: 打包 skill 目录为 zip
+        run: |
+          zip -r "${{ inputs.skill_dir }}-v${{ inputs.version }}.zip" "${{ inputs.skill_dir }}" -x "*.git*"
+          ls -la "${{ inputs.skill_dir }}-v${{ inputs.version }}.zip"
+
+      - name: 创建 GitHub Release 并上传 zip
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.skill_dir }}-v${{ inputs.version }}
+          name: ${{ inputs.skill_dir }} v${{ inputs.version }}
+          body: |
+            ## ${{ inputs.skill_dir }} v${{ inputs.version }}
+            从仓库定点 release 的 skill 包，可直接解压到 agent 的 skills 目录使用。
+          files: ${{ inputs.skill_dir }}-v${{ inputs.version }}.zip
+          generate_release_notes: true
+          replace_assets: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
