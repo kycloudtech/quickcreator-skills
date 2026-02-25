@@ -9,16 +9,19 @@ This skill teaches AI agents (Cursor, Windsurf, Claude Code, and other Cursor-co
 
 ## Prerequisites (for the skill to work)
 
-1. **QuickCreator developer token**  
-   Create one at [QuickCreator Agent Dev](https://agent-dev.quickcreator.io/demo/chat) → Settings → Create Token (read, write, publish).
+1. **QuickCreator developer token**  *(do this first)*  
+   Create a token at [QuickCreator Agent Dev](https://agent-dev.quickcreator.io/demo/chat) → **Settings → Create Token** (select **read, write, publish**).  
+   You will paste this value into the MCP config as `QC_API_TOKEN`.
 
-2. **Skill MCP registered** in the agent’s MCP config (e.g. Cursor: `~/.cursor/mcp.json`) with **both** env vars:
+2. **Create / update MCP config file** for the Skill MCP  
+   For Cursor and most Cursor-compatible agents this is `~/.cursor/mcp.json` (create the file if it does not exist yet).  
+   Register the `quickcreator-skill` MCP server with **both** env vars:
 
    - `QC_API_TOKEN` = your developer token  
    - `QC_API_URL` = `https://api-dev.quickcreator.io/ai-blog-chat-service`  
      (Keep this until the MCP is officially production-ready; then remove it to use the default production URL.)
 
-Example `mcp.json` entry:
+Example `~/.cursor/mcp.json`:
 
 ```json
 {
