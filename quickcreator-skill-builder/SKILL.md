@@ -90,7 +90,7 @@ If uncertain, ask the user in simple language: "You are currently using which to
 
 Then write the configuration file automatically:
 
-**JSON agents** (Cursor, Windsurf, Claude Code, Cline, OpenCode):
+**JSON agents** (Cursor, Windsurf, Claude Code, Cline, OpenClaw):
 
 | Agent | Config file path |
 |-------|-----------------|
@@ -98,7 +98,6 @@ Then write the configuration file automatically:
 | Windsurf | `~/.codeium/windsurf/mcp_config.json` |
 | Claude Code | `~/.claude.json` or project `.mcp.json` |
 | Cline | `~/.cline/data/settings/cline_mcp_settings.json` |
-| OpenCode | Project `.mcp.json` or `~/.config/opencode/mcp.json` |
 | OpenClaw | Project `.mcp.json` or `~/.openclaw/mcp.json` |
 
 JSON content to merge into `mcpServers`:
@@ -116,6 +115,24 @@ JSON content to merge into `mcpServers`:
   }
 }
 ```
+
+**OpenCode**: Edit project `opencode.json` or `~/.config/opencode/opencode.json`:
+```json
+{
+  "mcp": {
+    "quickcreator-skill": {
+      "type": "local",
+      "command": ["npx", "-y", "@quickcreator/skill-mcp"],
+      "enabled": true,
+      "environment": {
+        "QC_API_TOKEN": "<DEVELOPER_KEY_HERE>",
+        "QC_API_URL": "https://api-dev.quickcreator.io/ai-blog-chat-service"
+      }
+    }
+  }
+}
+```
+OpenCode uses a different config format: root key is `"mcp"` (not `"mcpServers"`), requires `"type": "local"`, command is a single array (not separate `command`/`args`), and env vars use `"environment"` (not `"env"`). If `opencode.json` already has other settings (model, theme, etc.), merge the `"mcp"` field without overwriting existing content.
 
 **TOML agents** (Codex): Edit `~/.codex/config.toml`:
 ```toml
