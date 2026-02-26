@@ -12,7 +12,7 @@ permalink: /
 Create and publish skills for the [QuickCreator](https://www.quickcreator.io) skill marketplace — right from your AI assistant. No coding required.
 {: .fs-6 .fw-300 }
 
-[Get Started](/quickcreator-skills/getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Get Started](/getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View on GitHub](https://github.com/kycloudtech/quickcreator-skills){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
@@ -54,7 +54,7 @@ npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/qu
 
 Use `-g` for global install; use `-a cursor -a claude-code` to target specific assistants.
 
-Or manually copy the `quickcreator-skill-builder` folder into your assistant's skills directory. See [Getting Started](/quickcreator-skills/getting-started) for detailed instructions.
+Or manually copy the `quickcreator-skill-builder` folder into your assistant's skills directory. See [Getting Started](/getting-started) for detailed instructions.
 
 ---
 

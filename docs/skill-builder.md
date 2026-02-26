@@ -160,7 +160,7 @@ Skills running on the QuickCreator platform can:
 | **Run code** | Execute Python or JavaScript for custom processing |
 | **Generate videos** | Create videos using AI (Google Veo) |
 
-For detailed technical specifications, see the [Tool Reference](/quickcreator-skills/tool-reference).
+For detailed technical specifications, see the [Tool Reference](/tool-reference).
 
 ---
 

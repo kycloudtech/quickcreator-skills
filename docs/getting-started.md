@@ -101,4 +101,4 @@ Once connected, you can:
 - **Edit your skills** — Update skills you've already created
 - **Publish** — Share your skills with the community
 
-See the [Skill Builder Guide](/quickcreator-skills/skill-builder) for a detailed walkthrough.
+See the [Skill Builder Guide](/skill-builder) for a detailed walkthrough.
