@@ -64,26 +64,78 @@ Replace `<SKILLS_DIR>` with the path for your agent from the table below.
 
 ## Where to install (by agent)
 
-Install the **entire** `quickcreator-developer-skill` folder (the one that contains `SKILL.md`) into the directory listed for your environment. Use **one** of the paths that apply.
+Install the **entire** `quickcreator-developer-skill` folder (the one that contains `SKILL.md`) into the skills directory used by your agent. Path conventions below follow the [open agent skills ecosystem](https://github.com/vercel-labs/skills) (Vercel Labs **npx skills**). Use **project** path for a single repo, **global** path for all projects.
 
-| Agent / Product        | Skills directory (install target) | Notes |
-|------------------------|-----------------------------------|--------|
-| **Cursor**             | `~/.cursor/skills/`               | Global skills; same on macOS, Linux, Windows (`%USERPROFILE%\.cursor\skills\`). |
-| **Cursor (project)**  | `<project_root>/.cursor/skills/`  | Project-only skill. |
-| **Windsurf (Codeium)**| `~/.cursor/skills/` or product docs | If it uses Cursor-compatible skills, use the same path as Cursor; else check [Windsurf docs](https://docs.windsurf.com). |
-| **Claude Code / Codex** | `$CODEX_HOME/skills/` or `~/.cursor/skills/` | Use the skills root your agent is configured to load from. |
-| **Other Cursor-compatible agents** | That agent’s documented “skills” or “rules” directory | Ensure the folder contains `SKILL.md` and is the one the agent scans. |
+### Install via npx skills (if you use the skills CLI)
 
-**Resulting path examples**
+If you already use [vercel-labs/skills](https://github.com/vercel-labs/skills), you can install this skill with:
 
-- **Cursor (global, macOS/Linux):**  
-  `~/.cursor/skills/quickcreator-developer-skill/SKILL.md`
-- **Cursor (Windows):**  
-  `%USERPROFILE%\.cursor\skills\quickcreator-developer-skill\SKILL.md`
-- **Project-scoped (Cursor):**  
-  `<your-project>/.cursor/skills/quickcreator-developer-skill/SKILL.md`
+```bash
+# Direct path to this skill in the repo
+npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-developer-skill
 
-After installation, the agent should auto-discover the skill when the user asks to list, create, fork, publish, or manage QuickCreator skills.
+# Global install (all projects)
+npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-developer-skill -g
+
+# Target specific agents (e.g. Cursor + Claude Code)
+npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-developer-skill -a cursor -a claude-code
+```
+
+### Manual install — skills directory by agent
+
+Copy the `quickcreator-developer-skill` folder into **Project path** (repo-scoped) or **Global path** (user-wide). On Windows, replace `~` with `%USERPROFILE%`.
+
+| Agent | Project path | Global path |
+|-------|--------------|-------------|
+| **Cursor** | `.cursor/skills/` or `.agents/skills/` | `~/.cursor/skills/` |
+| **Claude Code** | `.claude/skills/` | `~/.claude/skills/` |
+| **Codex** | `.agents/skills/` | `~/.codex/skills/` |
+| **OpenCode** | `.agents/skills/` | `~/.config/opencode/skills/` |
+| **Windsurf** | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| **Cline** | `.cline/skills/` | `~/.cline/skills/` |
+| **Continue** | `.continue/skills/` | `~/.continue/skills/` |
+| **GitHub Copilot** | `.agents/skills/` | `~/.copilot/skills/` |
+| **OpenHands** | `.openhands/skills/` | `~/.openhands/skills/` |
+| **Amp** | `.agents/skills/` | `~/.config/agents/skills/` |
+| **Kimi Code CLI** | `.agents/skills/` | `~/.config/agents/skills/` |
+| **Replit** | `.agents/skills/` | `~/.config/agents/skills/` |
+| **Antigravity** | `.agent/skills/` | `~/.gemini/antigravity/skills/` |
+| **Augment** | `.augment/skills/` | `~/.augment/skills/` |
+| **OpenClaw** | `skills/` | `~/.openclaw/skills/` |
+| **CodeBuddy** | `.codebuddy/skills/` | `~/.codebuddy/skills/` |
+| **Command Code** | `.commandcode/skills/` | `~/.commandcode/skills/` |
+| **Cortex Code** | `.cortex/skills/` | `~/.snowflake/cortex/skills/` |
+| **Crush** | `.crush/skills/` | `~/.config/crush/skills/` |
+| **Droid (Factory)** | `.factory/skills/` | `~/.factory/skills/` |
+| **Gemini CLI** | `.agents/skills/` | `~/.gemini/skills/` |
+| **Goose** | `.goose/skills/` | `~/.config/goose/skills/` |
+| **Junie** | `.junie/skills/` | `~/.junie/skills/` |
+| **iFlow CLI** | `.iflow/skills/` | `~/.iflow/skills/` |
+| **Kilo Code** | `.kilocode/skills/` | `~/.kilocode/skills/` |
+| **Kiro CLI** | `.kiro/skills/` | `~/.kiro/skills/` |
+| **Kode** | `.kode/skills/` | `~/.kode/skills/` |
+| **MCPJam** | `.mcpjam/skills/` | `~/.mcpjam/skills/` |
+| **Mistral Vibe** | `.vibe/skills/` | `~/.vibe/skills/` |
+| **Mux** | `.mux/skills/` | `~/.mux/skills/` |
+| **Pi** | `.pi/skills/` | `~/.pi/agent/skills/` |
+| **Qoder** | `.qoder/skills/` | `~/.qoder/skills/` |
+| **Qwen Code** | `.qwen/skills/` | `~/.qwen/skills/` |
+| **Roo Code** | `.roo/skills/` | `~/.roo/skills/` |
+| **Trae** | `.trae/skills/` | `~/.trae/skills/` |
+| **Trae CN** | `.trae/skills/` | `~/.trae-cn/skills/` |
+| **Zencoder** | `.zencoder/skills/` | `~/.zencoder/skills/` |
+| **Neovate** | `.neovate/skills/` | `~/.neovate/skills/` |
+| **Pochi** | `.pochi/skills/` | `~/.pochi/skills/` |
+| **AdaL** | `.adal/skills/` | `~/.adal/skills/` |
+
+**Examples**
+
+- **Cursor (global, macOS/Linux):** `~/.cursor/skills/quickcreator-developer-skill/`
+- **Cursor (Windows):** `%USERPROFILE%\.cursor\skills\quickcreator-developer-skill\`
+- **Claude Code (project):** `<project_root>/.claude/skills/quickcreator-developer-skill/`
+- **Windsurf (global):** `~/.codeium/windsurf/skills/quickcreator-developer-skill/`
+
+After installation, the agent should auto-discover the skill when the user asks to list, create, fork, publish, or manage QuickCreator skills. **MCP config** (`~/.cursor/mcp.json` or your agent’s MCP config path) must still be set up with `QC_API_TOKEN` and `QC_API_URL` as in [Prerequisites](#prerequisites-for-the-skill-to-work).
 
 ---
 
@@ -103,4 +155,5 @@ After installation, the agent should auto-discover the skill when the user asks 
 
 - [QuickCreator Skill MCP (npm)](https://www.npmjs.com/package/@quickcreator/skill-mcp)
 - [Agent Skills spec (agentskills.io)](https://agentskills.io)
+- [Vercel Labs skills (npx skills)](https://github.com/vercel-labs/skills) — agent paths and install via `npx skills add`
 - [Repository](https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-developer-skill)
