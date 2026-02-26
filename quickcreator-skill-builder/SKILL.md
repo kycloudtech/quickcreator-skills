@@ -1,52 +1,20 @@
 ---
-name: quickcreator-developer-skill
+name: quickcreator-skill-builder
 description: Develop, maintain, and publish skills for the QuickCreator platform. Use when the user wants to list, search, fork, create, update, publish, or delete QuickCreator skills, or when working with the QuickCreator skill marketplace and skill lifecycle management.
 ---
 
-# QuickCreator Skill Developer
+# QuickCreator Skill Builder
 
-Develop and maintain skills within the QuickCreator ecosystem using the QuickCreator Skill MCP.
+This skill teaches the agent to develop and maintain QuickCreator skills (list, create, fork, publish, install, delete) using the **QuickCreator Skill MCP**.
 
-## Prerequisites
+## Prerequisites (user must have done this)
 
-Before using this skill, two things must be set up:
+This skill only works if the **QuickCreator Skill MCP** is set up:
 
-### 1. Developer Token
+1. **Developer token** — The user has a QuickCreator developer token (from [QuickCreator Agent Dev](https://agent-dev.quickcreator.io/demo/chat) → Settings → Create Token, with read/write/publish).
+2. **MCP config** — The `quickcreator-skill` MCP server is added to the user's agent config with `QC_API_TOKEN` and `QC_API_URL`.
 
-The user needs a QuickCreator developer token:
-
-1. Go to [QuickCreator Agent Dev](https://agent-dev.quickcreator.io/demo/chat)
-2. Open **Settings → Create Token**
-3. Choose **read, write, and publish** permissions
-4. Copy the generated token
-
-### 2. Install the Skill MCP
-
-The `@quickcreator/skill-mcp` package must be configured. Add to `~/.cursor/mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "quickcreator-skill": {
-      "command": "npx",
-      "args": ["@quickcreator/skill-mcp"],
-      "env": {
-        "QC_API_TOKEN": "<developer_token_from_step_1>",
-        "QC_API_URL": "https://api-dev.quickcreator.io/ai-blog-chat-service"
-      }
-    }
-  }
-}
-```
-
-The developer token is exchanged for an API token automatically by the MCP.
-
-> Temporary note (development phase):  
-> For now we **intentionally hardcode**  
-> `QC_API_URL = "https://api-dev.quickcreator.io/ai-blog-chat-service"`  
-> in `~/.cursor/mcp.json` because `@quickcreator/skill-mcp` is still in active development.  
-> Once the MCP is officially released, remove this override and rely on the default
-> production URL instead.
+**If the user has not set this up:** Guide them to the repository [README](https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder). The README has step-by-step instructions (get token → add MCP to the config file for their agent). You can also perform those steps: read the README, identify the MCP config path for their agent from the table, and add or merge the `quickcreator-skill` entry with the user's token. Do not duplicate the full path table or JSON/TOML examples here—they are in the README.
 
 ---
 
@@ -73,8 +41,7 @@ The developer token is exchanged for an API token automatically by the MCP.
 To avoid common MCP errors (especially \"Input validation error\" / missing required fields), **always follow these rules when calling `quickcreator-skill` tools**:
 
 1. **Always read the tool schema before first use in a session**
-   - Use the local filesystem (like `Read`) to open the corresponding descriptor, e.g.  
-     `mcps/user-quickcreator-skill/tools/list_skills.json`
+   - Open the tool descriptor for the QuickCreator MCP server (e.g. in Cursor this may be under a path like `mcps/<mcp-server-id>/tools/<tool_name>.json`; in other agents, check where MCP tool schemas are exposed or use the agent’s tool documentation).
    - Inspect:
      - `required` fields
      - Allowed enums

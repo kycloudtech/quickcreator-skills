@@ -1,6 +1,6 @@
 # Available Tools for Generated Skills
 
-These built-in tools are available for skills running on the QuickCreator platform.
+These built-in tools are available to **skills that run on the QuickCreator platform** (i.e. skills created and published via the QuickCreator Skill Builder). When you create or edit a skill with the skill builder, use this reference for image, knowledge base, code execution, and video parameters.
 
 ## Image Generation
 
@@ -112,7 +112,7 @@ Execute Python or JavaScript code in the sandbox.
 
 **Prerequisite**: `GOOGLE_API_KEY` env var must be set. The `google-genai` package must be installed (add to `requirements.sh`).
 
-A reusable template script is provided at [scripts/generate_video.py](../scripts/generate_video.py).
+A reusable template script is provided at [scripts/generate_video.py](scripts/generate_video.py).
 
 ### Veo 3.1 Parameters
 

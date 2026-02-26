@@ -1,6 +1,6 @@
 # Skill Development Standards
 
-All skills created, updated, or published through the QuickCreator platform MUST comply with these standards.
+This document defines the standards for skills **created, updated, or published on the QuickCreator platform**. It is used by the QuickCreator Skill Builder (see [SKILL.md](SKILL.md)) when creating, updating, or publishing skills. All skills created, updated, or published through QuickCreator MUST comply with these standards.
 
 ## Hard Rules (Non-Negotiable)
 

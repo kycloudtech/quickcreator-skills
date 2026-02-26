@@ -6,12 +6,16 @@ on:
   workflow_dispatch:
     inputs:
       skill_dir:
-        description: 'Skill 目录名（例如 quickcreator-developer-skill）'
+        description: 'Skill 目录名（例如 quickcreator-skill-builder）'
         required: true
         type: string
       version:
         description: '版本号（例如 1.0.0）'
         required: true
+        type: string
+      release_note:
+        description: 'Release Note（本次发布说明，留空则使用默认描述）'
+        required: false
         type: string
 
 jobs:
@@ -54,7 +58,8 @@ jobs:
           name: ${{ inputs.skill_dir }} v${{ inputs.version }}
           body: |
             ## ${{ inputs.skill_dir }} v${{ inputs.version }}
-            从仓库定点 release 的 skill 包，可直接解压到 agent 的 skills 目录使用。
+
+            ${{ inputs.release_note || '从仓库定点 release 的 skill 包，可直接解压到 agent 的 skills 目录使用。' }}
           files: ${{ inputs.skill_dir }}-v${{ inputs.version }}.zip
           generate_release_notes: true
           replace_assets: true
