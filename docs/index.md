@@ -2,14 +2,14 @@
 layout: default
 title: Home
 nav_order: 1
-description: "Build, publish, and manage skills for the QuickCreator platform using AI agents."
+description: "Create and publish skills for QuickCreator — no coding required."
 permalink: /
 ---
 
 # QuickCreator Skill Builder
 {: .fs-9 }
 
-Build, publish, and manage skills for the QuickCreator platform using AI agents and the QuickCreator Skill MCP.
+Create and publish skills for the [QuickCreator](https://www.quickcreator.io) skill marketplace — right from your AI assistant. No coding required.
 {: .fs-6 .fw-300 }
 
 [Get Started](/quickcreator-skills/getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
@@ -17,61 +17,63 @@ Build, publish, and manage skills for the QuickCreator platform using AI agents 
 
 ---
 
-## What is QuickCreator Skill Builder?
+## What is it?
 
-The QuickCreator Skill Builder is an **agent skill** that lets your AI coding agent (Cursor, Claude Code, Codex, Windsurf, etc.) **develop and maintain QuickCreator skills**: list, search, create, fork, publish, and manage skills on the [QuickCreator](https://www.quickcreator.io) platform using the [QuickCreator Skill MCP](https://www.npmjs.com/package/@quickcreator/skill-mcp).
+The QuickCreator Skill Builder lets you **create, manage, and publish skills** on the QuickCreator skill marketplace — all through a natural conversation with your AI assistant (Cursor, OpenCode, Claude Code, Windsurf, and more).
 
-### Key Capabilities
+Just describe your idea, and the AI assistant handles everything: naming, structuring, building, and publishing.
 
-| Capability | Description |
-|:-----------|:------------|
-| **Browse & Discover** | List and search skills across personal, built-in, marketplace, and installed categories |
-| **Create** | Build new skills with the correct structure and `SKILL.md` |
-| **Fork & Modify** | Fork marketplace or built-in skills to personal workspace and update files |
-| **Publish** | Publish personal skills to the marketplace and update existing listings |
-| **Install / Uninstall** | Manage marketplace skill installations |
-| **Delete** | Remove personal skills |
+### What you can do
 
-### How It Works
+| | |
+|:--|:--|
+| **Create a new skill** | Describe your idea, and the assistant builds it for you |
+| **Browse the marketplace** | Discover skills published by others |
+| **Edit your skills** | Update and improve skills you've created |
+| **Publish to marketplace** | Share your skills with the community |
+| **Copy & customize** | Take an existing skill and make it your own |
+| **Install & uninstall** | Add or remove marketplace skills |
 
-The skill teaches your AI agent how to interact with the **QuickCreator Skill MCP** — a Model Context Protocol server that provides 13 tools for managing skills on the QuickCreator platform.
+### How it works
 
 ```
-Your AI Agent  ──→  QuickCreator Skill MCP  ──→  QuickCreator Platform
-  (Cursor, etc.)       (npm package)             (skills marketplace)
+You describe your idea  →  AI assistant builds the skill  →  Publish to marketplace
 ```
+
+Your AI assistant understands what you want, creates the skill content, and handles all the technical details behind the scenes.
 
 ---
 
 ## Quick Install
 
-**Using npx skills CLI:**
+**Using the skills CLI:**
 
 ```bash
 npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder
 ```
 
-Use `-g` for global install; use `-a cursor -a claude-code` to target specific agents.
+Use `-g` for global install; use `-a cursor -a claude-code` to target specific assistants.
 
-Or manually copy the `quickcreator-skill-builder` folder into your agent's skills directory. See [Getting Started](/quickcreator-skills/getting-started) for detailed instructions.
+Or manually copy the `quickcreator-skill-builder` folder into your assistant's skills directory. See [Getting Started](/quickcreator-skills/getting-started) for detailed instructions.
 
 ---
 
-## Repository Files
+## How to use after installation
 
-| File | Purpose |
-|:-----|:--------|
-| **SKILL.md** | Instructions for the agent: how to use the MCP tools, workflows, and rules |
-| **skill-standards.md** | QuickCreator skill content and format rules |
-| **tool-reference.md** | Reference for tools available to skills on QuickCreator |
-| **requirements.sh** | Dependencies declaration for scripts |
-| **scripts/generate_video.py** | Template script for video generation (Veo) via `code_execute` |
+| AI Assistant | How to start |
+|:-------------|:-------------|
+| **Cursor** | Type `/` in chat → select `quickcreator-skill-builder` → press Enter |
+| **OpenCode** | Type `/quickcreator-skill-builder` in chat → press Enter |
+| **Claude Code** | Just say "I want to create a QuickCreator skill" |
+| **Other** | Mention "QuickCreator skill" in your conversation |
+
+On first use, the skill will guide you to get your **developer key** from QuickCreator and automatically set up the connection. This is a one-time step.
 
 ---
 
 ## References
 
-- [QuickCreator Skill MCP (npm)](https://www.npmjs.com/package/@quickcreator/skill-mcp)
-- [Agent Skills spec (agentskills.io)](https://agentskills.io)
-- [Vercel Labs skills (npx skills)](https://github.com/vercel-labs/skills)
 - [QuickCreator Platform](https://www.quickcreator.io)
+- [Agent Skills Specification](https://agentskills.io)
+- [QuickCreator Skill MCP (npm)](https://www.npmjs.com/package/@quickcreator/skill-mcp)
+- [Skills CLI (npx skills)](https://github.com/vercel-labs/skills)

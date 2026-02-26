@@ -1,27 +1,36 @@
 # QuickCreator Skill Builder
 
-This skill lets your AI agent **develop and maintain QuickCreator skills**: list, search, create, fork, publish, and manage skills on the [QuickCreator](https://www.quickcreator.io) platform using the [QuickCreator Skill MCP](https://www.npmjs.com/package/@quickcreator/skill-mcp).
+Create, manage, and publish skills on the [QuickCreator](https://www.quickcreator.io) skill marketplace — right from your AI assistant.
 
-If the user asked to **install this skill**, follow the steps below. The agent can use this README to install the skill and then guide the user to set up the MCP. Other files in this repo (e.g. `SKILL.md`, `skill-standards.md`, `tool-reference.md`, `requirements.sh`) can be read when needed.
+No coding required. Just describe your idea, and the AI assistant will handle everything: building the skill, setting up the content, and publishing it to the marketplace.
 
 ---
 
-## Step 1 — Install the skill
+## Quick Start
 
-Put the `quickcreator-skill-builder` folder (the one that contains `SKILL.md`) into your agent’s **skills directory** so the agent can load it.
+### Step 1 — Install the skill
 
-### Get the folder
+Put the `quickcreator-skill-builder` folder (containing `SKILL.md`) into your AI assistant's **skills directory**.
 
-- **From the repo**: Clone or download [this repository](https://github.com/kycloudtech/quickcreator-skills), then use the folder `quickcreator-skills/quickcreator-skill-builder`.
-- **From a release**: Download the latest zip from [Releases](https://github.com/kycloudtech/quickcreator-skills/releases) and unzip so you have a folder named `quickcreator-skill-builder` with `SKILL.md` inside.
+**Option A: Download manually**
 
-### Where to put it (by agent)
+Download from [this repository](https://github.com/kycloudtech/quickcreator-skills) and copy the `quickcreator-skill-builder` folder to the correct location (see table below).
 
-Copy the **entire** `quickcreator-skill-builder` folder into one of the paths below. **Global** = available in all projects; **Project** = only in that project. On Windows, use `%USERPROFILE%` instead of `~`.
+**Option B: Use the skills CLI**
 
-| Agent | Project path | Global path |
-|-------|--------------|-------------|
-| **Cursor** | `.cursor/skills/` or `.agents/skills/` | `~/.cursor/skills/` |
+```bash
+npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder
+```
+
+Use `-g` for global install; use `-a cursor -a claude-code` to target specific assistants.
+
+#### Where to put the folder
+
+Copy the **entire** `quickcreator-skill-builder` folder to one of these locations. **Global** = available in all projects; **Project** = only in that project.
+
+| AI Assistant | Project path | Global path |
+|-------------|--------------|-------------|
+| **Cursor** | `.cursor/skills/` | `~/.cursor/skills/` |
 | **Claude Code** | `.claude/skills/` | `~/.claude/skills/` |
 | **Codex** | `.agents/skills/` | `~/.codex/skills/` |
 | **OpenCode** | `.agents/skills/` | `~/.config/opencode/skills/` |
@@ -29,140 +38,67 @@ Copy the **entire** `quickcreator-skill-builder` folder into one of the paths be
 | **Cline** | `.cline/skills/` | `~/.cline/skills/` |
 | **Continue** | `.continue/skills/` | `~/.continue/skills/` |
 | **GitHub Copilot** | `.agents/skills/` | `~/.copilot/skills/` |
-| **OpenHands** | `.openhands/skills/` | `~/.openhands/skills/` |
-| **Amp, Kimi, Replit** | `.agents/skills/` | `~/.config/agents/skills/` |
-| **Antigravity** | `.agent/skills/` | `~/.gemini/antigravity/skills/` |
-| **Augment** | `.augment/skills/` | `~/.augment/skills/` |
 | **OpenClaw** | `skills/` | `~/.openclaw/skills/` |
-| **CodeBuddy** | `.codebuddy/skills/` | `~/.codebuddy/skills/` |
-| **Command Code** | `.commandcode/skills/` | `~/.commandcode/skills/` |
-| **Cortex** | `.cortex/skills/` | `~/.snowflake/cortex/skills/` |
-| **Crush** | `.crush/skills/` | `~/.config/crush/skills/` |
-| **Droid** | `.factory/skills/` | `~/.factory/skills/` |
+| **OpenHands** | `.openhands/skills/` | `~/.openhands/skills/` |
 | **Gemini CLI** | `.agents/skills/` | `~/.gemini/skills/` |
-| **Goose** | `.goose/skills/` | `~/.config/goose/skills/` |
-| **Junie** | `.junie/skills/` | `~/.junie/skills/` |
-| **iFlow CLI** | `.iflow/skills/` | `~/.iflow/skills/` |
-| **Kilo, Kiro, Kode** | (see agent docs) | `~/.kilocode/skills/`, `~/.kiro/skills/`, `~/.kode/skills/` |
-| **MCPJam** | `.mcpjam/skills/` | `~/.mcpjam/skills/` |
-| **Mistral Vibe** | `.vibe/skills/` | `~/.vibe/skills/` |
-| **Mux** | `.mux/skills/` | `~/.mux/skills/` |
-| **Pi** | `.pi/skills/` | `~/.pi/agent/skills/` |
-| **Qoder, Qwen, Roo** | (see agent docs) | `~/.qoder/skills/`, `~/.qwen/skills/`, `~/.roo/skills/` |
-| **Trae / Trae CN** | `.trae/skills/` | `~/.trae/skills/`, `~/.trae-cn/skills/` |
-| **Zencoder, Neovate, Pochi, AdaL** | (see agent docs) | `~/.zencoder/skills/`, etc. |
 
-**Using the npx skills CLI:** If the user has [vercel-labs/skills](https://github.com/vercel-labs/skills), you can run:
+On Windows, replace `~` with `%USERPROFILE%`. For other assistants, see [agentskills.io](https://agentskills.io).
 
-```bash
-npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder
-```
+### Step 2 — Restart your AI assistant
 
-Use `-g` for global install; use `-a cursor -a claude-code` to target specific agents.
+Restart or reload your AI assistant so it picks up the new skill.
 
-After copying the folder, the user may need to **restart or reload the agent** so it sees the new skill.
+### Step 3 — Start using it
+
+| AI Assistant | How to start |
+|-------------|-------------|
+| **Cursor** | Type `/` in chat → select `quickcreator-skill-builder` → press Enter |
+| **OpenCode** | Type `/quickcreator-skill-builder` in chat → press Enter |
+| **Claude Code** | Just say "I want to create a QuickCreator skill" |
+| **Other** | Mention "QuickCreator skill" in your conversation |
+
+**On first use**, the skill will guide you to get your **developer key** from QuickCreator and automatically set up the connection. This is a one-time setup — you won't need to do it again.
 
 ---
 
-## Step 2 — Set up the QuickCreator MCP (required)
+## What you can do
 
-This skill talks to QuickCreator through an MCP server. The user must do two things: get a developer token, then add the MCP to their agent’s config.
-
-### 2a. Get a QuickCreator developer token
-
-1. Open [QuickCreator Agent Dev](https://agent-dev.quickcreator.io/demo/chat).
-2. Go to **Settings → Create Token**.
-3. Create a token with **read, write, and publish** permissions.
-4. Copy the token and keep it safe (you will paste it into the MCP config as `QC_API_TOKEN`).
-
-### 2b. Add the MCP server to your agent’s config
-
-The config file path depends on the agent. Create the file if it doesn’t exist. On Windows, use `%USERPROFILE%` instead of `~`.
-
-| Agent | MCP config file (global) | Format |
-|-------|---------------------------|--------|
-| **Cursor** | `~/.cursor/mcp.json` | JSON |
-| **Windsurf** | `~/.codeium/windsurf/mcp_config.json` | JSON |
-| **Claude Code** | `~/.claude.json` or project `.mcp.json` | JSON |
-| **Cline** (CLI) | `~/.cline/data/settings/cline_mcp_settings.json` | JSON |
-| **Codex** | `~/.codex/config.toml` | TOML |
-| **Continue** | `~/.continue/config.json` (MCP section) | JSON |
-
-**For JSON configs (Cursor, Windsurf, Claude Code, Cline):** Add the block below to the config file. If the file already has `mcpServers`, merge this entry into it. Replace `<your_developer_token>` with the token from step 2a.
-
-```json
-{
-  "mcpServers": {
-    "quickcreator-skill": {
-      "command": "npx",
-      "args": ["@quickcreator/skill-mcp"],
-      "env": {
-        "QC_API_TOKEN": "<your_developer_token>",
-        "QC_API_URL": "https://api-dev.quickcreator.io/ai-blog-chat-service"
-      }
-    }
-  }
-}
-```
-
-**For Codex (TOML):** Edit `~/.codex/config.toml` and add:
-
-```toml
-[mcp_servers.quickcreator-skill]
-command = "npx"
-args = ["@quickcreator/skill-mcp"]
-env = { QC_API_TOKEN = "<your_developer_token>", QC_API_URL = "https://api-dev.quickcreator.io/ai-blog-chat-service" }
-```
-
-**Note:** `QC_API_URL` is set to the dev API while the MCP is in development. When the MCP is officially production-ready, you can remove `QC_API_URL` and the MCP will use the default production URL.
+- **Create a new skill** — Describe your idea, and the assistant builds it for you
+- **Browse the marketplace** — Discover skills published by others
+- **Edit your skills** — Update and improve skills you've created
+- **Publish to marketplace** — Share your skills with the community
+- **Copy & customize** — Take an existing skill and make it your own
+- **Install & uninstall** — Add or remove marketplace skills
 
 ---
 
-## Step 3 — You’re ready
+## Getting your developer key
 
-Restart or reload the agent if you just installed the skill or changed the MCP config.
+1. Visit [QuickCreator Developer Platform](https://agent-dev.quickcreator.io/demo/chat)
+2. Log in or create a free account
+3. Go to **Settings** → **Create Key**
+4. Enable **read**, **write**, and **publish** permissions
+5. Copy the key — you'll paste it when the skill asks for it
 
-You can now ask your agent to:
-
-- List your QuickCreator skills (personal, marketplace, installed)
-- Create a new skill
-- Fork a skill from the marketplace and edit it
-- Publish a skill to the marketplace
-- Install or uninstall marketplace skills
-
-The skill (`SKILL.md`) teaches the agent how to do these things using the QuickCreator Skill MCP.
+This is done once. The skill guides you through it on first use.
 
 ---
 
-## What this skill does
+## Files in this package
 
-- **List and search** QuickCreator skills (personal, built-in, marketplace, installed).
-- **Create** new skills with the correct structure and `SKILL.md`.
-- **Fork** marketplace or built-in skills to personal and **update** files.
-- **Publish** personal skills to the marketplace and **update** existing listings.
-- **Install / uninstall** marketplace skills.
-- **Delete** personal skills.
-- Follow QuickCreator skill standards and pre-publish checklist (see `skill-standards.md`).
-
----
-
-## Other files in this repo
-
-| File | Purpose |
-|------|---------|
-| **SKILL.md** | Instructions for the agent: how to use the MCP tools, workflows, and rules. The agent loads this when the skill is active. |
-| **skill-standards.md** | QuickCreator skill content and format rules (English, naming, no secrets, etc.). Used when creating or publishing skills. |
-| **tool-reference.md** | Reference for tools available to skills that run on QuickCreator (images, knowledge base, code execution, video). |
-| **requirements.sh** | Declares dependencies for scripts (e.g. `google-genai` for `scripts/generate_video.py`). Required when the skill has a `scripts/` directory; see skill-standards.md. |
-| **scripts/generate_video.py** | Template script for video generation (Veo) via `code_execute`. |
-
-The agent can read these when helping the user create or edit QuickCreator skills.
+| File | What it does |
+|------|-------------|
+| **SKILL.md** | Instructions for the AI assistant — loaded automatically |
+| **skill-standards.md** | Content and format rules for QuickCreator skills |
+| **tool-reference.md** | Reference for tools available to skills on the QuickCreator platform |
+| **requirements.sh** | Dependency declarations for script-based skills |
+| **scripts/generate_video.py** | Template for video generation capabilities |
 
 ---
 
 ## References
 
+- [QuickCreator Platform](https://www.quickcreator.io)
+- [Agent Skills Specification](https://agentskills.io)
 - [QuickCreator Skill MCP (npm)](https://www.npmjs.com/package/@quickcreator/skill-mcp)
-- [Agent Skills spec (agentskills.io)](https://agentskills.io)
-- [Vercel Labs skills (npx skills)](https://github.com/vercel-labs/skills)
-- [Repository](https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder)
+- [Skills CLI (npx skills)](https://github.com/vercel-labs/skills)

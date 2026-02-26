@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Skill Builder
+title: Skill Builder Guide
 nav_order: 3
-description: "Core workflows and MCP tools for building QuickCreator skills."
+description: "How to create, edit, and publish skills on the QuickCreator marketplace."
 ---
 
-# Skill Builder
+# Skill Builder Guide
 {: .no_toc }
 
-Core workflows and MCP tool reference for developing, publishing, and managing QuickCreator skills.
+A complete guide to creating, editing, and publishing skills on the QuickCreator skill marketplace.
 {: .fs-6 .fw-300 }
 
 <details open markdown="block">
@@ -20,205 +20,154 @@ Core workflows and MCP tool reference for developing, publishing, and managing Q
 
 ---
 
-## MCP Tools Reference
+## Creating a New Skill
 
-The QuickCreator Skill MCP provides 13 tools for managing skills:
+### Step 1: Describe your idea
 
-| Tool | Description |
-|:-----|:------------|
-| `list_skills` | List skills by category: `personal`, `builtin`, `marketplace`, `installed` |
-| `search_marketplace` | Search marketplace by tag (sorted by publish time or downloads) |
-| `get_skill` | Get skill detail and full file tree |
-| `get_skill_file` | Read a specific file from any skill |
-| `create_skill` | Create a new empty personal skill |
-| `fork_skill` | Fork a builtin/marketplace/installed skill to personal |
-| `update_skill_file` | Update a file in a personal skill |
-| `create_skill_file` | Add a new file to a personal skill |
-| `delete_skill` | Delete a personal skill |
-| `publish_skill` | Publish a personal skill to the marketplace |
-| `update_published_skill` | Update an existing marketplace listing |
-| `install_skill` | Install a marketplace skill |
-| `uninstall_skill` | Uninstall a marketplace skill |
+Start a conversation with your AI assistant and tell it what you want to build. You don't need to know any technical details — just describe your idea in plain language.
 
-### Skill ID Prefixes
+**Examples of good starting points:**
 
-| Prefix | Type | Access |
-|:-------|:-----|:-------|
-| `sk_` | Built-in | Read-only |
-| `mk_` | Marketplace | Published by users |
-| `p_` | Personal | Editable workspace |
-| `i_` | Installed | Read-only copies |
+- "I want to create a skill that generates social media posts with images for product promotion"
+- "Help me build a skill that writes personalized marketing emails based on customer data"
+- "I need a skill that creates product comparison tables from web research"
 
----
+### Step 2: Answer a few questions
 
-## Core Workflows
+The assistant will ask you some questions to understand your idea better:
 
-### Browse & Discover
+- **What does it do?** — The core purpose of the skill
+- **Who is it for?** — The target audience and the problem it solves
+- **What steps should it follow?** — The ideal workflow, step by step
+- **What capabilities does it need?** — Image generation, web search, knowledge base access, etc.
+- **Any examples?** — Sample inputs and expected outputs
 
-```python
-list_skills(category="marketplace")    # Browse marketplace
-list_skills(category="personal")       # View your skills
-search_marketplace(tag="marketing")    # Search by tag
-get_skill(skillId="mk_xxx")           # View skill details
-```
+{: .tip }
+You don't have to have all the answers. The assistant can help fill in the gaps and suggest improvements.
 
-### Create a New Skill
+### Step 3: Review the design
 
-1. `create_skill(name="my-skill-name")` — creates an empty personal skill (`p_` prefixed)
-2. `create_skill_file(...)` — add SKILL.md with proper frontmatter
-3. Add reference files, scripts as needed via `create_skill_file`
-4. **Before publishing**: run the [Pre-Publish Checklist](#pre-publish-checklist)
-5. `publish_skill(personalSkillId="p_xxx")`
+Before building, the assistant will show you a summary of what it plans to create:
 
-### Fork & Modify
+> "Here's what I'll build: **Product Social Post Generator** — generates social media posts with AI images for product promotion on Instagram, Facebook, and Twitter. Does that sound right?"
 
-1. `fork_skill(skillId="mk_xxx", source="marketplace")` — fork to personal
-2. `get_skill(skillId="p_xxx")` — inspect the forked skill
-3. `update_skill_file(...)` — modify files
-4. Publish when ready
+You can adjust the design before the assistant starts building.
 
-### Update an Existing Skill
+### Step 4: Build and iterate
 
-1. `get_skill(skillId="p_xxx")` — read current state
-2. `update_skill_file(...)` — modify files
-3. If already published: `update_published_skill(marketplaceSkillId="mk_xxx", personalSkillId="p_xxx")`
+The assistant creates the skill automatically. Once built, you'll see a summary of what was created. You can then:
 
-### Delete
-
-```python
-delete_skill(personalSkillId="p_xxx")
-```
+- **Make changes** — "Can you add support for LinkedIn too?"
+- **Test the workflow** — "Show me what the skill does step by step"
+- **Publish immediately** — "Publish it to the marketplace"
 
 ---
 
-## MCP Tool Usage Rules
+## Browsing the Marketplace
 
-{: .important }
-Follow these rules to avoid common MCP errors (especially "Input validation error" / missing required fields).
+Ask your assistant to show you what's available:
 
-### 1. Always Read the Tool Schema First
+- "Show me skills on the marketplace"
+- "Search for marketing skills"
+- "Find skills related to image generation"
 
-Before first use in a session, open the tool descriptor and inspect:
-- `required` fields
-- Allowed enums
-- Whether an `arguments` object is mandatory
-
-### 2. Always Pass the `arguments` Object
-
-Even if only one field is required, you **must** pass `arguments:{...}`.
-
-**Bad** (missing `category`, causes error):
-```json
-{
-  "server": "quickcreator-skill",
-  "toolName": "list_skills"
-}
-```
-
-**Good:**
-```json
-{
-  "server": "quickcreator-skill",
-  "toolName": "list_skills",
-  "arguments": { "category": "marketplace" }
-}
-```
-
-### 3. Always Respect Enums and Field Names
-
-- `list_skills.category` must be one of: `"personal"`, `"builtin"`, `"marketplace"`, `"installed"`
-- `fork_skill` requires **both**: `skillId` and `source` (∈ `"marketplace"`, `"builtin"`, `"installed"`)
-
-### 4. Use Explicit Examples
-
-**list_skills:**
-```json
-{
-  "server": "quickcreator-skill",
-  "toolName": "list_skills",
-  "arguments": { "category": "personal" }
-}
-```
-
-**create_skill:**
-```json
-{
-  "server": "quickcreator-skill",
-  "toolName": "create_skill",
-  "arguments": {
-    "name": "ecommerce-product-image-batch",
-    "description": "Generates e-commerce product images in batches."
-  }
-}
-```
-
-**publish_skill:**
-```json
-{
-  "server": "quickcreator-skill",
-  "toolName": "publish_skill",
-  "arguments": {
-    "personalSkillId": "p_xxx",
-    "authorName": "Your Name",
-    "tags": ["ecommerce", "images"],
-    "version": "1.0.0"
-  }
-}
-```
-
-### 5. Fix Errors by Re-reading the Schema
-
-On any MCP validation error, re-open the tool schema and fix arguments instead of retrying blindly. Look for:
-- `expected` vs `received` types
-- The property path (e.g. `["category"]`) to identify wrong or missing fields
+The assistant will show you a list of available skills with descriptions of what each one does.
 
 ---
 
-## Skill File Structure
+## Copying and Customizing Existing Skills
 
-Every skill follows this layout:
+Found a skill you like but want to modify it? Just ask:
 
-```
-skill-name/
-├── SKILL.md              # Required — main instructions
-├── reference.md          # Optional — detailed docs
-├── examples.md           # Optional — usage examples
-├── requirements.sh       # Required if scripts/ exists
-└── scripts/              # Optional — utility scripts
-    └── helper.py
-```
+- "I want to create my own version of [skill name]"
+- "Copy that skill so I can customize it"
 
-### SKILL.md Template
-
-```markdown
----
-name: my-skill-name
-description: Does X when the user needs Y. Use when working with Z.
----
-
-# My Skill Name
-
-## Instructions
-Step-by-step guidance for the agent.
-
-## Examples
-Concrete usage examples.
-```
+The assistant will create a personal copy that you can edit freely.
 
 ---
 
-## Pre-Publish Checklist
+## Editing Your Skills
 
-{: .warning }
-Run this checklist before every `publish_skill` or `update_published_skill` call.
+To modify a skill you've already created:
 
-- [ ] `name` field: lowercase, hyphens, digits only; no leading/trailing/consecutive hyphens; ≤64 chars
-- [ ] `description` field: English, ≤1024 chars, includes WHAT + WHEN + trigger keywords
-- [ ] ALL content (headings, steps, notes, references) is in English
-- [ ] No hardcoded API keys or secrets (use env vars)
-- [ ] SKILL.md has valid YAML frontmatter with `name` and `description`
-- [ ] SKILL.md body is under 500 lines
-- [ ] Reference files are one level deep (linked directly from SKILL.md)
-- [ ] If scripts/ exists: requirements.sh is present and lists all dependencies
-- [ ] Consistent terminology throughout
-- [ ] Follows [Agent Skills spec](https://agentskills.io)
+- "Show me my skills"
+- "Edit [skill name]"
+- "I want to change how [skill name] works"
+
+The assistant will show you what the skill currently does and help you make changes.
+
+---
+
+## Publishing to the Marketplace
+
+When your skill is ready to share, just say:
+
+- "Publish my skill to the marketplace"
+- "Share [skill name] with the community"
+
+The assistant will:
+1. Ask for your name (as the author) and suggest relevant tags
+2. Run a quality check to make sure everything is in order
+3. Fix any issues automatically
+4. Publish it to the marketplace
+
+{: .note }
+You can update a published skill at any time — just edit it and tell the assistant to publish the update.
+
+---
+
+## Installing Marketplace Skills
+
+To add skills created by others:
+
+- "Install [skill name] from the marketplace"
+- "I want to use that skill"
+
+---
+
+## Deleting Skills
+
+To remove a skill from your collection:
+
+- "Delete [skill name]"
+
+The assistant will confirm before deleting, since this action cannot be undone.
+
+---
+
+## What Makes a Good Skill?
+
+The best skills share these qualities:
+
+| Quality | Description |
+|:--------|:------------|
+| **Clear purpose** | Solves one specific problem well |
+| **Step-by-step workflow** | Follows a logical sequence of actions |
+| **Right capabilities** | Uses the appropriate tools (images, web search, knowledge base, etc.) |
+| **Good examples** | Includes sample inputs and expected outputs |
+| **Useful for others** | Solves a problem that many people share |
+
+### Available capabilities for skills
+
+Skills running on the QuickCreator platform can:
+
+| Capability | What it does |
+|:-----------|:------------|
+| **Generate images** | Create images from text descriptions or transform existing images |
+| **Search the web** | Find and research information online |
+| **Access knowledge base** | Retrieve content from the user's own knowledge base |
+| **Ask user questions** | Collect structured input from users during the workflow |
+| **Run code** | Execute Python or JavaScript for custom processing |
+| **Generate videos** | Create videos using AI (Google Veo) |
+
+For detailed technical specifications, see the [Tool Reference](/quickcreator-skills/tool-reference).
+
+---
+
+## Tips for Success
+
+1. **Start simple** — Begin with a straightforward workflow, then add complexity
+2. **Be specific** — "Generate Instagram posts for food products" is better than "help with social media"
+3. **Include examples** — Show the assistant what good output looks like
+4. **Test before publishing** — Review the skill workflow to make sure it does what you expect
+5. **Iterate** — Your first version doesn't have to be perfect. Edit and improve over time
