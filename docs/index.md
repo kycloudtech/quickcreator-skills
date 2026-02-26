@@ -1,79 +1,48 @@
 ---
 layout: default
-title: Home
+title: Install QuickCreator Skill Builder
 nav_order: 1
-description: "Create and publish skills for QuickCreator — no coding required."
 permalink: /
 ---
 
-# QuickCreator Skill Builder
-{: .fs-9 }
+# Install QuickCreator Skill Builder
 
-Create and publish skills for the [QuickCreator](https://www.quickcreator.io) skill marketplace — right from your AI assistant. No coding required.
-{: .fs-6 .fw-300 }
-
-[Get Started](/getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[View on GitHub](https://github.com/kycloudtech/quickcreator-skills){: .btn .fs-5 .mb-4 .mb-md-0 }
+This page is for AI agents. If you are a human user, paste this URL into your AI assistant's chat to trigger automatic installation.
 
 ---
 
-## What is it?
+## For AI Agents
 
-The QuickCreator Skill Builder lets you **create, manage, and publish skills** on the QuickCreator skill marketplace — all through a natural conversation with your AI assistant (Cursor, OpenCode, Claude Code, Windsurf, and more).
+You are being asked to install the **QuickCreator Skill Builder** skill. This skill lets users create, manage, and publish skills on the [QuickCreator](https://www.quickcreator.io) platform through conversation.
 
-Just describe your idea, and the AI assistant handles everything: naming, structuring, building, and publishing.
+### How to install
 
-### What you can do
+1. **Read the installation guide** — Fetch and read the full README at:
 
-| | |
-|:--|:--|
-| **Create a new skill** | Describe your idea, and the assistant builds it for you |
-| **Browse the marketplace** | Discover skills published by others |
-| **Edit your skills** | Update and improve skills you've created |
-| **Publish to marketplace** | Share your skills with the community |
-| **Copy & customize** | Take an existing skill and make it your own |
-| **Install & uninstall** | Add or remove marketplace skills |
+   ```
+   https://raw.githubusercontent.com/kycloudtech/quickcreator-skills/master/quickcreator-skill-builder/README.md
+   ```
 
-### How it works
+   This README contains the exact installation paths for every supported AI assistant (Cursor, Claude Code, Codex, OpenCode, Windsurf, Cline, Continue, GitHub Copilot, Gemini CLI, and more).
 
-```
-You describe your idea  →  AI assistant builds the skill  →  Publish to marketplace
-```
+2. **Follow the instructions in the README** to install the `quickcreator-skill-builder` folder into the correct skills directory for your platform.
 
-Your AI assistant understands what you want, creates the skill content, and handles all the technical details behind the scenes.
+### Quick install command
 
----
-
-## Quick Install
-
-**Using the skills CLI:**
+If the user's environment supports it, run:
 
 ```bash
 npx skills add https://github.com/kycloudtech/quickcreator-skills/tree/master/quickcreator-skill-builder
 ```
 
-Use `-g` for global install; use `-a cursor -a claude-code` to target specific assistants.
+Use `-g` for global install. Use `-a cursor` or `-a claude-code` to target a specific assistant.
 
-Or manually copy the `quickcreator-skill-builder` folder into your assistant's skills directory. See [Getting Started](/getting-started) for detailed instructions.
+### Manual install
 
----
+Download the `quickcreator-skill-builder` folder from the repository and copy it to the appropriate skills directory. The README linked above has the full directory table for each assistant.
 
-## How to use after installation
-
-| AI Assistant | How to start |
-|:-------------|:-------------|
-| **Cursor** | Type `/` in chat → select `quickcreator-skill-builder` → press Enter |
-| **OpenCode** | Type `/quickcreator-skill-builder` in chat → press Enter |
-| **Claude Code** | Just say "I want to create a QuickCreator skill" |
-| **Other** | Mention "QuickCreator skill" in your conversation |
-
-On first use, the skill will guide you to get your **developer key** from QuickCreator and automatically set up the connection. This is a one-time step.
+**Repository:** [https://github.com/kycloudtech/quickcreator-skills](https://github.com/kycloudtech/quickcreator-skills)
 
 ---
 
-## References
-
-- [QuickCreator Platform](https://www.quickcreator.io)
-- [Agent Skills Specification](https://agentskills.io)
-- [QuickCreator Skill MCP (npm)](https://www.npmjs.com/package/@quickcreator/skill-mcp)
-- [Skills CLI (npx skills)](https://github.com/vercel-labs/skills)
+After installation, restart the AI assistant so it discovers the new skill.
