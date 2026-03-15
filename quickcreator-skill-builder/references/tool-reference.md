@@ -58,6 +58,35 @@ Web search and research.
 | `search_domain_filter` | string[]\|null | No | null | Limit search domains (max 10); prefix `-` to exclude |
 | `user_location_country_code` | string\|null | No | null | ISO 3166-1 alpha-2 country code for localized search |
 
+### `fetch_google_search`
+
+Fetch Google search results directly.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `query` | string | **Yes** | Search query; supports operators like `inurl:`, `site:`, `intitle:`, `as_dt`, `as_eq` |
+| `num` | number | **Yes** | Number of results to fetch; supported values: `10`, `20`, `30`, `50`, `100` |
+| `tbs` | string\|null | **Yes** | Time filter: `"qdr:h"` (hour), `"qdr:d"` (day), `"qdr:w"` (week), `"qdr:m"` (month), `"qdr:y"` (year), or `null` (any time) |
+| `locale` | string | **Yes** | Two-letter country code for regional results (e.g., `"us"`, `"cn"`) |
+| `language_id` | string | **Yes** | Language code (e.g., `"en"`, `"zh-CN"`, `"zh-TW"`, `"pt-PT"`, `"pt-BR"`) |
+
+### `get_info_from_webpage`
+
+Analyze and extract information from a specific web page.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `url` | string | **Yes** | URL of the target webpage |
+| `information_requirements` | string | **Yes** | Description of what to understand or extract from the page |
+
+### `scrape_webpage`
+
+Scrape a web page and return its content in markdown format along with meta info.
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `url` | string | **Yes** | URL of the target webpage |
+
 ---
 
 ## User Interaction
@@ -112,7 +141,7 @@ Execute Python or JavaScript code in the sandbox.
 
 **Prerequisite**: `GOOGLE_API_KEY` env var must be set. The `google-genai` package must be installed (add to `requirements.sh`).
 
-A reusable template script is provided at [scripts/generate_video.py](scripts/generate_video.py).
+A reusable template script is provided at [../scripts/generate_video.py](../scripts/generate_video.py).
 
 ### Veo 3.1 Parameters
 

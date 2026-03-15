@@ -88,11 +88,17 @@ This is done once. The skill guides you through it on first use.
 
 | File | What it does |
 |------|-------------|
-| **SKILL.md** | Instructions for the AI assistant — loaded automatically |
-| **skill-standards.md** | Content and format rules for QuickCreator skills |
-| **tool-reference.md** | Reference for tools available to skills on the QuickCreator platform |
+| **SKILL.md** | Main instructions — routing hub for all workflows, loaded automatically |
 | **requirements.sh** | Dependency declarations for script-based skills |
 | **scripts/generate_video.py** | Template for video generation capabilities |
+| **references/setup-guide.md** | First-time connection setup flow (developer key, agent detection, config) |
+| **references/create-skill-workflow.md** | 4-phase skill creation workflow (discovery → design → build → review) |
+| **references/manage-skills.md** | Skill lifecycle operations (browse, copy, edit, install, delete) |
+| **references/publish-workflow.md** | Publishing flow, pre-publish checklist, and updating published skills |
+| **references/skill-content-guide.md** | Content patterns, generation guidelines, templates, and examples |
+| **references/agent-technical-reference.md** | MCP tool usage rules, tools quick reference, and skill ID conventions |
+| **references/skill-standards.md** | Content and format rules for QuickCreator skills |
+| **references/tool-reference.md** | Reference for tools available to skills on the QuickCreator platform |
 
 ---
 
