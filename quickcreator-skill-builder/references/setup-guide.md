@@ -20,7 +20,7 @@ Present this to the user in their language. Example in Chinese:
 >
 > 首次使用需要进行一次简单的连接设置。你只需要完成一个步骤：
 >
-> 1. 打开 [QuickCreator 开发者平台](https://agent.quickcreator.io)
+> 1. 打开 [QuickCreator 开发者平台](https://agent.quickcreator.io/demo/chat)
 > 2. 登录你的账号（没有账号可以免费注册）
 > 3. 进入 **设置** → 点击 **创建密钥**
 > 4. 确保开启 **读取**、**写入** 和 **发布** 权限

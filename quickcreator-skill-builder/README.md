@@ -76,7 +76,7 @@ Restart or reload your AI assistant so it picks up the new skill.
 
 ## Getting your developer key
 
-1. Visit [QuickCreator Developer Platform](https://agent.quickcreator.io)
+1. Visit [QuickCreator Developer Platform](https://agent.quickcreator.io/demo/chat)
 2. Log in or create a free account
 3. Go to **Settings** → **Create Key**
 4. Enable **read**, **write**, and **publish** permissions
