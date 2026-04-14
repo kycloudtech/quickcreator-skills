@@ -10,7 +10,7 @@ Usage:
 
 Options:
   --prompt TEXT              Text prompt (required)
-  --image-url URL            Starting frame URL for image-to-video
+  --image PATH_OR_URL        Starting frame — local file path or HTTP(S) URL
   --aspect-ratio 16:9|9:16   Aspect ratio (default: 16:9)
   --resolution 720p|1080p|4k Resolution (default: 720p)
   --duration 4|6|8           Duration in seconds (default: 8)
@@ -20,16 +20,37 @@ Options:
 """
 
 import argparse
+import base64
+import mimetypes
 import sys
 import time
+from pathlib import Path
 
 from google import genai
 from google.genai import types
 
 
+def load_image(image_source: str) -> types.Image:
+    """Load an image from a local file path or a remote URL."""
+    if image_source.startswith("http://") or image_source.startswith("https://"):
+        return types.Image.from_uri(image_source)
+
+    path = Path(image_source)
+    if not path.exists():
+        raise FileNotFoundError(f"Image file not found: {image_source}")
+
+    mime_type, _ = mimetypes.guess_type(str(path))
+    if not mime_type:
+        mime_type = "image/jpeg"
+
+    image_bytes = path.read_bytes()
+    image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+    return types.Image(image_bytes=base64.b64decode(image_b64), mime_type=mime_type)
+
+
 def generate_video(
     prompt: str,
-    image_url: str | None = None,
+    image_source: str | None = None,
     aspect_ratio: str = "16:9",
     resolution: str = "720p",
     duration_seconds: int = 8,
@@ -53,11 +74,11 @@ def generate_video(
         "config": config,
     }
 
-    if image_url:
-        kwargs["image"] = types.Image.from_uri(image_url)
+    if image_source:
+        kwargs["image"] = load_image(image_source)
         config.person_generation = "allow_adult"
 
-    print(f"Starting video generation...")
+    print("Starting video generation...")
     operation = client.models.generate_videos(**kwargs)
 
     while not operation.done:
@@ -75,7 +96,8 @@ def generate_video(
 def main():
     parser = argparse.ArgumentParser(description="Generate video using Google Veo 3.1")
     parser.add_argument("--prompt", required=True, help="Text prompt")
-    parser.add_argument("--image-url", default=None, help="Starting frame URL")
+    parser.add_argument("--image", default=None, dest="image_source",
+                        help="Starting frame — local file path or HTTP(S) URL")
     parser.add_argument("--aspect-ratio", default="16:9", choices=["16:9", "9:16"])
     parser.add_argument("--resolution", default="720p", choices=["720p", "1080p", "4k"])
     parser.add_argument("--duration", type=int, default=8, choices=[4, 6, 8])
@@ -87,7 +109,7 @@ def main():
 
     generate_video(
         prompt=args.prompt,
-        image_url=args.image_url,
+        image_source=args.image_source,
         aspect_ratio=args.aspect_ratio,
         resolution=args.resolution,
         duration_seconds=args.duration,

@@ -20,7 +20,7 @@ Present this to the user in their language. Example in Chinese:
 >
 > 首次使用需要进行一次简单的连接设置。你只需要完成一个步骤：
 >
-> 1. 打开 [QuickCreator 开发者平台](https://agent-dev.quickcreator.io/demo/chat)
+> 1. 打开 [QuickCreator 开发者平台](https://agent.quickcreator.io)
 > 2. 登录你的账号（没有账号可以免费注册）
 > 3. 进入 **设置** → 点击 **创建密钥**
 > 4. 确保开启 **读取**、**写入** 和 **发布** 权限
@@ -33,6 +33,8 @@ Wait for the user to provide the key. Validate it is a non-empty string.
 ---
 
 ## Step 2: Auto-Detect Agent & Write Config
+
+> **Note for agents:** Before writing the config, check if the config file already contains an MCP entry named `quickcreator-skill`. If it does, it was likely set up against the old dev environment — rename it to `quickcreator-skill-dev` and set its `QC_API_URL` to `https://api-dev.quickcreator.io/ai-blog-chat-service` first, then proceed to write the new `quickcreator-skill` entry below.
 
 Detect which agent is running by examining the skill's file path or environment:
 
@@ -71,7 +73,8 @@ JSON content to merge into `mcpServers`:
       "command": "npx",
       "args": ["@quickcreator/skill-mcp"],
       "env": {
-        "QC_API_TOKEN": "<DEVELOPER_KEY_HERE>"
+        "QC_API_TOKEN": "<DEVELOPER_KEY_HERE>",
+        "QC_API_URL": "https://api.quickcreator.io/ai-blog-chat-service"
       }
     }
   }
@@ -89,7 +92,8 @@ Edit project `opencode.json` or `~/.config/opencode/opencode.json`:
       "command": ["npx", "-y", "@quickcreator/skill-mcp"],
       "enabled": true,
       "environment": {
-        "QC_API_TOKEN": "<DEVELOPER_KEY_HERE>"
+        "QC_API_TOKEN": "<DEVELOPER_KEY_HERE>",
+        "QC_API_URL": "https://api.quickcreator.io/ai-blog-chat-service"
       }
     }
   }
@@ -104,7 +108,7 @@ Edit `~/.codex/config.toml`:
 [mcp_servers.quickcreator-skill]
 command = "npx"
 args = ["@quickcreator/skill-mcp"]
-env = { QC_API_TOKEN = "<DEVELOPER_KEY_HERE>" }
+env = { QC_API_TOKEN = "<DEVELOPER_KEY_HERE>", QC_API_URL = "https://api.quickcreator.io/ai-blog-chat-service" }
 ```
 
 If the config file already exists, **merge** the entry without overwriting other content.
