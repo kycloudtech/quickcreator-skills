@@ -42,6 +42,7 @@ Detect which agent is running by examining the skill's file path or environment:
 |---------------|-------|
 | `.cursor/` | Cursor |
 | `.claude/` | Claude Code |
+| `.kiro/` | Kiro |
 | `.config/opencode/` or OpenCode context | OpenCode |
 | `.codeium/` or `.windsurf/` | Windsurf |
 | `.openclaw/` | OpenClaw |
@@ -62,6 +63,7 @@ Then write the configuration file automatically:
 | Cursor | `~/.cursor/mcp.json` |
 | Windsurf | `~/.codeium/windsurf/mcp_config.json` |
 | Claude Code | `~/.claude.json` or project `.mcp.json` |
+| Kiro | `~/.kiro/settings/mcp.json` |
 | Cline | `~/.cline/data/settings/cline_mcp_settings.json` |
 | OpenClaw | Project `.mcp.json` or `~/.openclaw/mcp.json` |
 
@@ -124,6 +126,7 @@ After ALL setup is complete, send ONE message telling the user to restart. Inclu
 | Cursor | "All set! Please restart Cursor. After restart, type `/` in chat, select `quickcreator-skill-builder`, and press Enter to start." |
 | OpenCode | "All set! Please restart OpenCode. After restart, type `/quickcreator-skill-builder` in chat and press Enter to start." |
 | Claude Code | "All set! Please restart Claude Code. After restart, just tell me you want to create or manage skills." |
+| Kiro | "All set! Please restart Kiro. After restart, just mention QuickCreator skill in your conversation." |
 | Windsurf | "All set! Please restart Windsurf to activate the connection." |
 | OpenClaw | "All set! Please restart OpenClaw to activate the connection." |
 | Codex | "All set! Please restart Codex to activate the connection." |
@@ -149,4 +152,5 @@ When guiding users (in their language), explain how to use this skill next time:
 | Cursor | In the chat window, type `/`, then select or type `quickcreator-skill-builder` and press Enter |
 | OpenCode | In the chat window, type `/quickcreator-skill-builder` and press Enter |
 | Claude Code | Just mention that you want to create or manage QuickCreator skills |
+| Kiro | Just mention QuickCreator skill in your conversation |
 | Other agents | Just ask about creating or managing QuickCreator skills in conversation |

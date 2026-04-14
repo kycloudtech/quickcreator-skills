@@ -38,6 +38,7 @@ Copy the **entire** `quickcreator-skill-builder` folder to one of these location
 | **Cline** | `.cline/skills/` | `~/.cline/skills/` |
 | **Continue** | `.continue/skills/` | `~/.continue/skills/` |
 | **GitHub Copilot** | `.agents/skills/` | `~/.copilot/skills/` |
+| **Kiro** | `.kiro/skills/` | `~/.kiro/skills/` |
 | **OpenClaw** | `skills/` | `~/.openclaw/skills/` |
 | **OpenHands** | `.openhands/skills/` | `~/.openhands/skills/` |
 | **Gemini CLI** | `.agents/skills/` | `~/.gemini/skills/` |
@@ -55,6 +56,7 @@ Restart or reload your AI assistant so it picks up the new skill.
 | **Cursor** | Type `/` in chat → select `quickcreator-skill-builder` → press Enter |
 | **OpenCode** | Type `/quickcreator-skill-builder` in chat → press Enter |
 | **Claude Code** | Just say "I want to create a QuickCreator skill" |
+| **Kiro** | Just mention "QuickCreator skill" in your conversation |
 | **Other** | Mention "QuickCreator skill" in your conversation |
 
 **On first use**, the skill will guide you to get your **developer key** from QuickCreator and automatically set up the connection. This is a one-time setup — you won't need to do it again.
