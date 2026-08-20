@@ -20,6 +20,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30   # 默认 360 分钟太长，挂死会烧穿 Actions 额度
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,6 +52,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30   # 默认 360 分钟太长，挂死会烧穿 Actions 额度
     needs: build
     steps:
       - name: Deploy to GitHub Pages
