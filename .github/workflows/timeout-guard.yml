@@ -1,0 +1,89 @@
+name: Workflow timeout guard
+
+# 拦住没设 timeout-minutes 的 job。
+# 不设则默认 360 分钟，挂死会空转满 6 小时才被杀，直接烧穿组织的 Actions 额度。
+# 本文件自包含，无外部依赖 —— 直接复制到任意仓库的 .github/workflows/ 即可。
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+  push:
+    branches: [main, master]
+    paths:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5          # 本 job 自己也必须设，以身作则
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - name: 校验所有 job 都设了 timeout-minutes
+        env:
+          MAX_TIMEOUT_MINUTES: '120'
+        run: |
+          cat > /tmp/check_timeouts.py <<'CHECKER_EOF'
+          #!/usr/bin/env python3
+          """校验 .github/workflows 下每个 job 都设了 timeout-minutes。
+
+          GitHub-hosted runner 的 job 默认上限 360 分钟，且没有任何组织级设置能调低。
+          一个挂死的 job 会空转满 360 分钟才被强杀 —— 2026-08-19 就是这样 4 个 run
+          烧掉约 24 小时 runner 时长，把 Actions 额度用完。
+          """
+          import os, sys, glob, yaml
+
+          MAX = int(os.environ.get("MAX_TIMEOUT_MINUTES", "120"))
+          root = os.environ.get("WORKFLOW_DIR", ".github/workflows")
+
+          bad, over, unparsed = [], [], []
+          files = sorted(glob.glob(os.path.join(root, "*.yml")) +
+                         glob.glob(os.path.join(root, "*.yaml")))
+
+          for fp in files:
+              try:
+                  doc = yaml.safe_load(open(fp, encoding="utf-8"))
+              except Exception as e:
+                  unparsed.append((fp, str(e).split("\n")[0]))
+                  continue
+              if not isinstance(doc, dict) or not isinstance(doc.get("jobs"), dict):
+                  continue
+              for jid, job in doc["jobs"].items():
+                  if not isinstance(job, dict):
+                      continue
+                  if "runs-on" not in job:
+                      continue          # reusable workflow 调用，超时由被调方负责
+                  t = job.get("timeout-minutes")
+                  if t is None:
+                      bad.append((fp, str(jid)))
+                  elif isinstance(t, int) and t > MAX:
+                      over.append((fp, str(jid), t))
+
+          if unparsed:
+              print("::warning::以下 workflow 无法解析，已跳过检查")
+              for fp, err in unparsed:
+                  print(f"::warning file={fp}::{err}")
+
+          for fp, jid in bad:
+              print(f"::error file={fp}::job `{jid}` 缺少 timeout-minutes。"
+                    f"不设则默认 360 分钟，挂死会烧穿 Actions 额度。"
+                    f"请在该 job 的 runs-on 下加一行 timeout-minutes（建议取历史耗时的 3 倍）。")
+          for fp, jid, t in over:
+              print(f"::error file={fp}::job `{jid}` 的 timeout-minutes={t} 超过上限 {MAX}。"
+                    f"如确需更长，请调高本仓库的 MAX_TIMEOUT_MINUTES 并说明理由。")
+
+          if bad or over:
+              print(f"\n检查未通过：{len(bad)} 个 job 缺超时，{len(over)} 个 job 超时过长。")
+              sys.exit(1)
+
+          print(f"检查通过：{len(files)} 个 workflow 文件，所有 job 均已设置合理的 timeout-minutes。")
+
+          CHECKER_EOF
+          python /tmp/check_timeouts.py
