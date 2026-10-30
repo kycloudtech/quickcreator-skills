@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-30",
+  "source": "internal seo-operations local installed snapshot",
+  "source_commit": "af8cf9bef70a8757c2451abea42a112722f14f96",
+  "files": [
+    {
+      "path": "b2b-website-sales-audit/SKILL.md",
+      "sha256": "100a4bb2b06a01a8a615981b179a90dfa49bcf9c2265526ad7b1baa42e61cd05"
+    },
+    {
+      "path": "b2b-website-sales-audit/assets/client-brief-template.md",
+      "sha256": "0faa0a2c42a30ae2498fd7ef4509c77cbe1a1679a38304150dfa115cd19c3002"
+    },
+    {
+      "path": "b2b-website-sales-audit/assets/evidence-template.md",
+      "sha256": "b895ac1f4944c4b87b719243a44cdffdaaddf55559984d6c05272bee61a9aaa4"
+    },
+    {
+      "path": "b2b-website-sales-audit/assets/sales-brief-template.md",
+      "sha256": "8095d53968d6389cf39a5729650ae00e8c7ab312672e6f8e318e40516a6cb37f"
+    },
+    {
+      "path": "b2b-website-sales-audit/references/assessment-rubric.md",
+      "sha256": "ff6b5d926cfcc583411e485a68a07fdebf244f61e5e8ebb14ab70dcecd379222"
+    },
+    {
+      "path": "b2b-website-sales-audit/references/evidence-and-tool-routing.md",
+      "sha256": "6508e97352e08223532cdddcb824606a41eb9f0d318215bed8e6756d2f1af7f7"
+    },
+    {
+      "path": "b2b-website-sales-audit/references/sales-conversation.md",
+      "sha256": "45c94c0d8e320c76e38ba16b9b386e302b8963ef0e1fd2577ff1d01b9f836777"
+    },
+    {
+      "path": "check-crawlability/SKILL.md",
+      "sha256": "e49b08e328a7b832e4d1742bebb8b8e9a81be48b4a7509fce06f247572d68910"
+    },
+    {
+      "path": "check-crawlability/scripts/crawl_check.py",
+      "sha256": "4377d0648b9a627e9a004d0d3b070331b5fc292f55d46d9467476da56676e97e"
+    },
+    {
+      "path": "page-seo-inspector/SKILL.md",
+      "sha256": "dc0d40439868b73a2256396a29484423ee663b5f104c952fa7e3d5c5e8fe966c"
+    },
+    {
+      "path": "page-seo-inspector/scripts/page_seo_inspector.py",
+      "sha256": "a1eaada87e4780924e72aa1039be6923e0e92c7e5bc98034984cb388e171b6c9"
+    },
+    {
+      "path": "geo-content-audit/SKILL.md",
+      "sha256": "30511e09635933afcd13abdbe0979140dce88786fe399aaa3a3058a11ce37aa2"
+    }
+  ]
+}
