@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-01",
+  "source": "website-visual-scorer local working files",
+  "source_repository": "https://github.com/kycloudtech/website-visual-scorer",
+  "remote_public_status_checked": false,
+  "source_commit": "95d78cae0af209a2a31f0e92aef8344fd79815c8",
+  "note": "Hashes describe input working files; adapted public files differ. Source is the independent project, not a verified identical seo-operations snapshot.",
+  "files": [
+    {
+      "path": "website-visual-scorer/SKILL.md",
+      "sha256": "cc2bd12349221186e3ce19db4da0bd907fb53378aa26cdf21e8c13132fe6554d"
+    },
+    {
+      "path": "website-visual-scorer/references/scoring-rubric.md",
+      "sha256": "d8e801982d51339877ca7c2b727f1d163b30d78c366a9b7adf0f61200478593d"
+    },
+    {
+      "path": "website-visual-scorer/references/industry-benchmarks.md",
+      "sha256": "5c5ed61ae0c19fb55287b61102aa1d1c5f6b51c493216670fb76d844a537e605"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "9eef073db271bd63a20f7b74c1856878cc5df3cb475c6e5bf6d72830ea6c59e8"
+    }
+  ]
+}
